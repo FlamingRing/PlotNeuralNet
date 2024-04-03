@@ -57,6 +57,39 @@ def to_Conv( name, s_filer=256, n_filer=64, offset="(0,0,0)", to="(0,0,0)", widt
     };
 """
 
+# Conv
+def to_Module( name, s_filer=256, n_filer=64, offset="(0,0,0)", to="(0,0,0)", width=1, height=40, depth=40, caption=" ", 
+              color=r"{rgb:green,5;red,2.5;white,5}"):
+    if s_filer is None:
+        return r"""
+    \pic[shift={"""+ offset +"""}] at """+ to +""" 
+        {Box={
+            name=""" + name +""",
+            caption="""+ caption +r""",
+            fill=""" + color +""",
+            height="""+ str(height) +""",
+            width="""+ str(width) +""",
+            depth="""+ str(depth) +"""
+            }
+        };
+    """
+    else:
+        return r"""
+    \pic[shift={"""+ offset +"""}] at """+ to +""" 
+        {Box={
+            name=""" + name +""",
+            caption="""+ caption +r""",
+            xlabel={{"""+ str(n_filer) +""", }},
+            zlabel="""+ str(s_filer) +""",
+            fill=""" + color +""",
+            height="""+ str(height) +""",
+            width="""+ str(width) +""",
+            depth="""+ str(depth) +"""
+            }
+        };
+    """
+
+
 # Conv,Conv,relu
 # Bottleneck
 def to_ConvConvRelu( name, s_filer=256, n_filer=(64,64), offset="(0,0,0)", to="(0,0,0)", width=(2,2), height=40, depth=40, caption=" " ):
@@ -174,6 +207,19 @@ def to_Sum( name, offset="(0,0,0)", to="(0,0,0)", radius=2.5, opacity=0.6):
         opacity="""+ str(opacity) +""",
         radius="""+ str(radius) +""",
         logo=$+$
+        }
+    };
+"""
+
+def to_Multiply( name, offset="(0,0,0)", to="(0,0,0)", radius=2.5, opacity=0.6):
+    return r"""
+\pic[shift={"""+ offset +"""}] at """+ to +""" 
+    {Ball={
+        name=""" + name +""",
+        fill=\SumColor,
+        opacity="""+ str(opacity) +""",
+        radius="""+ str(radius) +""",
+        logo=$*$
         }
     };
 """
