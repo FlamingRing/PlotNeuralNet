@@ -1,7 +1,7 @@
 *.aux
 *.log
 *.gz
-*.pdf
+pyexamples/*.pdf
 
 __pycache__
 books
